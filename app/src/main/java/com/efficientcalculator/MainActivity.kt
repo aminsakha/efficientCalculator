@@ -32,8 +32,18 @@ class MainActivity : AppCompatActivity() {
                 input.remove(input.last())
             }
             else -> {
-                input.add(buttonText)
-                resultTextBox?.text = "${resultTextBox?.text}  ${button.text}"
+                if (Character.isDigit(buttonText[0])) {
+                    if (input.isNotEmpty() && Character.isDigit(input.last()[0])) {
+                        input[input.lastIndex] = input.last() + buttonText
+                        resultTextBox?.text = "${resultTextBox?.text}${button.text}"
+                    } else {
+                        input.add(buttonText)
+                        resultTextBox?.text = "${resultTextBox?.text}  ${button.text}"
+                    }
+                } else {
+                    input.add(buttonText)
+                    resultTextBox?.text = "${resultTextBox?.text}  ${button.text}"
+                }
             }
         }
     }
